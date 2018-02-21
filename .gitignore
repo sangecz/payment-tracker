@@ -1,7 +1,8 @@
 # idea
-.idea/
 out/
-*.iml
+
+!lib/*
+!release/*
 
 .DS_Store
 
