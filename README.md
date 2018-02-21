@@ -26,6 +26,7 @@ Net amounts are also expressed in relation to USD exchange rate (in brackets) ex
 ## Requirements
 * Java 9 SDK
 * gson 2.8.2
+* JUnit 5 (for tests)
 
 ## How to run
 Inside project folder:
