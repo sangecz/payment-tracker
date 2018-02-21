@@ -11,8 +11,9 @@ CZK 1.22
 ``` 
 Currency code (ISO 4217), space and amount is considered as one payment. Each payment should be on its own line.
 * user / pasted input into console in the same format as input file
-* Config file `config.properties` stores `API key` and `URL` to exchange rate service, sign up for free https://currencylayer.com/signup?plan=1 and insert provided `API key` in the config.
-If you don't fill `API key`, the program will run, but respective USD amounts for each other currency could not be calculated.
+* Main.java file stores `API` URL to exchange rate service, sign up for free 
+https://currencylayer.com/signup?plan=1 and insert provided `API key`.
+If you don't fill the key, the program will run, but respective USD amounts for each other currency could not be calculated.
 Anyway jar file contains `API key` for ease of use.
 
 ### Invalid input

@@ -1,29 +1,20 @@
 package cz.sange.paymenttracker;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
-
-// TODO unit tests them all
 
 public class Main {
 
-    private static final String CONFIG_PATH = "src/main/resources/config.properties";
     private static final int REPORTER_PERIOD = 60_000; // 60s
-
-    // filled from config
-    private String apiKey;
-    private String url;
+    private static final String API_KEY = ""; // TODO enter your API key
+    private static final String API = "http://apilayer.net/api/live?access_key=" + API_KEY;
 
     public static void main(String[] args) {
         Main m = new Main();
-        m.loadConfig();
         m.startTrackingPayments(args);
     }
 
     private void startTrackingPayments(String[] args) {
-        ExchangeRateProvider rateProvider = new ExchangeRateProvider(url + apiKey);
+        ExchangeRateProvider rateProvider = new ExchangeRateProvider(API);
         PaymentTracker paymentTracker = new PaymentTracker(rateProvider);
         paymentTracker.readInputFile(args);
         schedulePeriodicPaymentTracker(paymentTracker);
@@ -44,31 +35,5 @@ public class Main {
 
         // start postponed
         timer.scheduleAtFixedRate(task, calendar.getTime(), REPORTER_PERIOD);
-    }
-
-    /**
-     * Loads config file.
-     */
-    private void loadConfig() {
-        Properties prop = new Properties();
-        InputStream input = null;
-
-        try {
-            input = new FileInputStream(CONFIG_PATH);
-            prop.load(input);
-
-            apiKey = prop.getProperty("API_KEY");
-            url = prop.getProperty("URL");
-        } catch (IOException ex) {
-            System.err.println("Error reading config file");
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    System.err.println("Error closing config file");
-                }
-            }
-        }
     }
 }
